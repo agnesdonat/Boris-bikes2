@@ -7,14 +7,27 @@ describe DockingStation do
   it { is_expected.to respond_to(:release_bike) }
   it { is_expected.to respond_to(:dock).with(1).argument }
 
+  describe '#realse_bike' do
+
   it 'should release a bike' do
-  bike = subject.release_bike
-  expect(bike).to be_working
+    station = DockingStation.new
+    bike = Bike.new
+    station.dock(bike)
+    expect(station.release_bike).to eq bike
   end
 
+  it 'raises error when no bikes available' do
+    station = DockingStation.new
+    expect{station.release_bike}.to raise_error("sorry, no bikes available")
+  end
+
+  end
+
+
   it 'should dock a bike' do
+    station = DockingStation.new
     bike = Bike.new
-    expect(subject.dock(bike)).to eq bike
+    expect(station.dock(bike)).to eq station.array_of_bikes
   end
 
 end
