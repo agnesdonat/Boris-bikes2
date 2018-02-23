@@ -1,9 +1,10 @@
 require_relative 'bike'
 class DockingStation
 
-  attr_reader :bike, :array_of_bikes, :hired_bike
+  attr_reader :bike, :array_of_bikes, :hired_bike, :max_cap
 
   def initialize
+    @max_cap = 20
     @array_of_bikes = []
   end
 
@@ -13,6 +14,7 @@ class DockingStation
   end
 
   def dock(bike)
+    raise 'Sorry, Docking station full' if @array_of_bikes.length == @max_cap
     @bike = bike
     @array_of_bikes << @bike
   end

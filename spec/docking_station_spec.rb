@@ -23,6 +23,7 @@ describe DockingStation do
 
   end
 
+describe '#dock' do
 
   it 'should dock a bike' do
     station = DockingStation.new
@@ -30,4 +31,10 @@ describe DockingStation do
     expect(station.dock(bike)).to eq station.array_of_bikes
   end
 
+  it 'should raise error of no more available spaces' do
+    station = DockingStation.new
+    station.max_cap.times {station.dock(Bike.new)}
+    expect {station.dock(Bike.new)}.to raise_error 'Sorry, Docking station full'
+  end
+end
 end
